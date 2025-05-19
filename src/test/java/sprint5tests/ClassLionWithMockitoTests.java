@@ -10,11 +10,10 @@ import org.mockito.junit.MockitoJUnitRunner;
 
 import java.util.List;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertThrows;
+import static org.junit.Assert.*;
 
 @RunWith(MockitoJUnitRunner.class)
-public class classLionWithMockitoTests {
+public class ClassLionWithMockitoTests {
 
     @Mock
     Feline feline;
@@ -40,10 +39,10 @@ public class classLionWithMockitoTests {
         Lion lion = new Lion("Самец", feline);
         Lion spyLion = Mockito.spy(lion);
         Mockito.when(spyLion.doesHaveMane()).thenReturn(true);
-        assertEquals(true, spyLion.doesHaveMane());
+        assertTrue(spyLion.doesHaveMane());
 
         Mockito.when(spyLion.doesHaveMane()).thenReturn(false);
-        assertEquals(false, spyLion.doesHaveMane());
+        assertFalse(spyLion.doesHaveMane());
 
         Mockito.verify(spyLion, Mockito.times(2)).doesHaveMane();
     }
@@ -71,7 +70,7 @@ public class classLionWithMockitoTests {
 
         Mockito.when(spyLion.getFood()).thenThrow(new Exception(errorMessage));
         Exception exception = assertThrows(Exception.class,
-                () -> spyLion.getFood()
+                spyLion::getFood
         );
 
         assertEquals(errorMessage, exception.getMessage());
