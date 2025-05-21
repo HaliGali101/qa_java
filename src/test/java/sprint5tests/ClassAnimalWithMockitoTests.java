@@ -38,9 +38,18 @@ public class ClassAnimalWithMockitoTests {
         Mockito.verify(mockAnimal, Mockito.times(1)).getFood(Mockito.anyString());
     }
 
-    @Test(expected = Exception.class)
-    public void getFoodMethodTestWithoutMockNegative() throws Exception {
-        new Animal().getFood("Рыбы");
+    @Test
+    public void getFoodMethodTestWithoutMockNegative() {
+        Animal animal = new Animal();
+        String errorMessage = "Неизвестный вид животного, используйте значение Травоядное или Хищник";
+
+        Exception exception = assertThrows(Exception.class, () -> animal.getFood("Рыбы"));
+
+        assertEquals(
+                "Текст ошибки отличен от ожидаемого.\nОжидаем текст ошибки: " + errorMessage,
+                errorMessage,
+                exception.getMessage()
+        );
     }
 
     @Test

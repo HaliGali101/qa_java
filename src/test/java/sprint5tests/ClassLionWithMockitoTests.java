@@ -36,15 +36,11 @@ public class ClassLionWithMockitoTests {
 
     @Test
     public void doesHaveManeMethodWithMockTest() throws Exception {
-        Lion lion = new Lion("Самец", feline);
-        Lion spyLion = Mockito.spy(lion);
-        Mockito.when(spyLion.doesHaveMane()).thenReturn(true);
-        assertTrue(spyLion.doesHaveMane());
+        Lion lionMale = new Lion("Самец", feline);
+        assertTrue(lionMale.doesHaveMane());
 
-        Mockito.when(spyLion.doesHaveMane()).thenReturn(false);
-        assertFalse(spyLion.doesHaveMane());
-
-        Mockito.verify(spyLion, Mockito.times(2)).doesHaveMane();
+        Lion lionFemale = new Lion("Самка", feline);
+        assertFalse(lionFemale.doesHaveMane());
     }
 
     @Test
